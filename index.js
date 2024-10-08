@@ -6,9 +6,13 @@ const cors = require('cors');
 
 const app = express();
 
+// Configuración de middleware
 app.use(urlencoded({ extended: true }));
 app.use(json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://front-horoscopo.vercel.app', // Asegúrate de que esta URL sea correcta
+    methods: ['GET', 'POST', 'OPTIONS']
+}));
 
 app.use('/v1/signos', router);
 
@@ -31,16 +35,6 @@ const validateCredentials = async (username, password) => {
     }
 };
 
-
-export default function handler(req, res) {
-    if (req.method === 'GET') {
-      res.status(200).json({ message: '¡Hola desde GET!' });
-    } else {
-      res.setHeader('Allow', ['GET']);
-      res.status(405).end(`Método ${req.method} no permitido`);
-    }
-  }
-  
 // Ruta para manejar el login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
