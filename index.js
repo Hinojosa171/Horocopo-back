@@ -20,7 +20,7 @@ app.use('/v1/signos', router);
 const validateCredentials = async (username, password) => {
     try {
         if (username === 'user') {
-            const data = await fs.readFile('/db/User.json', 'utf-8');
+            const data = await fs.readFile('./User.json', 'utf-8');
             const { username: storedUser, password: storedPassword } = JSON.parse(data);
             console.log("userguardado: "+storedUser+ " passGuardado: "+storedPassword)
             console.log("userdigitado: "+username+ " passGuardado: "+password)
@@ -40,6 +40,7 @@ const validateCredentials = async (username, password) => {
 // Ruta para manejar el login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
+    console.log("userdigitado: "+username+ " passGuardado: "+password)
     const isValid = await validateCredentials(username, password);
 
     if (isValid) {
