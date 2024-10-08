@@ -20,7 +20,7 @@ app.use('/v1/signos', router);
 const validateCredentials = async (username, password) => {
     try {
         if (username === 'user') {
-            const data = await fs.readFile('./db/User.jon', 'utf-8');
+            const data = await fs.readFile('./db/User.json', 'utf-8');
             const { username: storedUser, password: storedPassword } = JSON.parse(data);
             return storedUser === username && storedPassword === password;
         } else if (username === 'admin') {
