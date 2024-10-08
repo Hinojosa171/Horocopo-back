@@ -31,6 +31,16 @@ const validateCredentials = async (username, password) => {
     }
 };
 
+
+export default function handler(req, res) {
+    if (req.method === 'GET') {
+      res.status(200).json({ message: '¡Hola desde GET!' });
+    } else {
+      res.setHeader('Allow', ['GET']);
+      res.status(405).end(`Método ${req.method} no permitido`);
+    }
+  }
+  
 // Ruta para manejar el login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
