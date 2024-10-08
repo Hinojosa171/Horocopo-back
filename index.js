@@ -20,11 +20,11 @@ app.use('/v1/signos', router);
 const validateCredentials = async (username, password) => {
     try {
         if (username === 'user') {
-            const data = await fs.readFile('./User.json', 'utf-8');
-            const { username: storedUser, password: storedPassword } = JSON.parse(data);
-            console.log("userguardado: "+storedUser+ " passGuardado: "+storedPassword)
-            console.log("userdigitado: "+username+ " passGuardado: "+password)
-            return storedUser === username && storedPassword === password;
+            //const data = await fs.readFile('./User.json', 'utf-8');
+            //const { username: storedUser, password: storedPassword } = JSON.parse(data);
+            //console.log("userguardado: "+storedUser+ " passGuardado: "+storedPassword)
+            //console.log("userdigitado: "+username+ " passGuardado: "+password)
+            return 'user' === username && 'user2023' === password;
         } else if (username === 'admin') {
             const data = await fs.readFile('/db', 'utf-8');
             const { username: storedUser, password: storedPassword } = JSON.parse(data);
@@ -40,10 +40,10 @@ const validateCredentials = async (username, password) => {
 // Ruta para manejar el login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const data = await fs.readFile('User.json', 'utf-8');
+    /* const data = await fs.readFile('User.json', 'utf-8');
     const { username: storedUser, password: storedPassword } = JSON.parse(data);
     console.log("userguardado: "+storedUser+ " passGuardado: "+storedPassword)
-    console.log("userdigitado: "+username+ " passGuardado: "+password)
+    console.log("userdigitado: "+username+ " passGuardado: "+password) */
     const isValid = await validateCredentials(username, password);
 
     if (isValid) {
