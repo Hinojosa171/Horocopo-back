@@ -22,6 +22,8 @@ const validateCredentials = async (username, password) => {
         if (username === 'user') {
             const data = await fs.readFile('/db/User.json', 'utf-8');
             const { username: storedUser, password: storedPassword } = JSON.parse(data);
+            console.log("userguardado: "+storedUser+ " passGuardado: "+storedPassword)
+            console.log("userdigitado: "+username+ " passGuardado: "+password)
             return storedUser === username && storedPassword === password;
         } else if (username === 'admin') {
             const data = await fs.readFile('/db', 'utf-8');
